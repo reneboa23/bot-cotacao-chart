@@ -1,0 +1,6 @@
+apiVersion: v2
+name: bot-cotacao
+description: Bot Telegram que envia cotação do dólar
+type: application
+version: 1.0.0
+appVersion: "1.3.1"

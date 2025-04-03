@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bot-cotacao.fullname" . }}
+  labels:
+    app: {{ include "bot-cotacao.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "bot-cotacao.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "bot-cotacao.name" . }}
+    spec:
+      containers:
+        - name: bot
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "bot-cotacao.fullname" . }}-secret
+                  key: BOT_TOKEN
+            - name: CHAT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "bot-cotacao.fullname" . }}-secret
+                  key: CHAT_ID
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+          livenessProbe:
+            exec:
+              command: ["pgrep", "-f", "bot_cotacao.py"]
+            initialDelaySeconds: 10
+            periodSeconds: 30

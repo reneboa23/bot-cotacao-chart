@@ -1,0 +1,16 @@
+image:
+  repository: reneboa23/bot-cotacao
+  tag: "1.3.1"
+  pullPolicy: IfNotPresent
+
+env:
+  BOT_TOKEN: "8007409101:AAFQ9VzklAcdFlz9onmdJcwoou0fHdXYhXE"
+  CHAT_ID: "-1002371946157"
+
+resources:
+  requests:
+    cpu: "50m"
+    memory: "64Mi"
+  limits:
+    cpu: "100m"
+    memory: "128Mi"
