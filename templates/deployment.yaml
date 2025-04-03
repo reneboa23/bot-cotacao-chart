@@ -29,6 +29,8 @@ spec:
                 secretKeyRef:
                   name: {{ include "bot-cotacao.fullname" . }}-secret
                   key: CHAT_ID
+            - name: TZ
+              value: {{ .Values.env.TZ }}
           resources:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
