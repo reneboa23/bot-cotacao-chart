@@ -1,6 +1,6 @@
 image:
   repository: reneboa23/bot-cotacao
-  tag: "1.3.2"
+  tag: "1.3.3"
   pullPolicy: IfNotPresent
 
 env:
